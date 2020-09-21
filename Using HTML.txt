@@ -1,0 +1,9 @@
+How to use HTML:
+
+This is how you securely copy a file to your public folder:
+
+scp Desktop/Website/Syllabus_Spring_2016.pdf laudone@login.math.wisc.edu:public/html
+
+This is how you login to the server remotely:
+
+ssh laudone@login.math.wisc.edu

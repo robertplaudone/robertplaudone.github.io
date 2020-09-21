@@ -1,0 +1,188 @@
+\documentclass[11pt]{article}  % This tells LaTex what sort of document style to use
+
+\usepackage{amssymb}  % These lines tell LaTeX to load additional symbol definitions and style definitions
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{changepage}
+\usepackage{setspace}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Formatting
+\setlength{\parskip}{0cm}
+\setlength{\parindent}{1cm}
+\singlespacing
+
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{3.25ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
+
+\DeclarePairedDelimiter\abs{\Bigl\bigg|}{\Bigr\bigg|}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  First we set the page layout.
+
+\usepackage[top=1 in, bottom=1in,left=.5in,right=.5in]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Now create some user defined commands.
+
+\newcommand{\map}[1]{\xrightarrow{\#1}}
+\newcommand{\iso}{\cong}
+\newcommand{\define}{\stackrel{\mathrm{def}}{=}}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\e}{\epsilon}
+\newcommand{\A}{\mathbb A}
+\newcommand{\p}{\mathbb P}
+
+\DeclareMathOperator{\lcm}{lcm}
+
+%  End user defined commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% These establish different environments for stating Theorems, Lemmas, Remarks, etc.
+
+\newtheorem{Thm}{Theorem}
+\newtheorem{Prop}[Thm]{Proposition}
+\newtheorem{Lem}[Thm]{Lemma}
+\newtheorem{Cor}[Thm]{Corollary}
+\newtheorem{Axiom}[Thm]{Axiom}
+
+\theoremstyle{definition}
+\newtheorem{Def}[Thm]{Definition}
+\newtheorem{Ex}[Thm]{Example}
+\newtheorem{Exercise}[Thm]{Exercise}
+\newtheorem{Fact}[Thm]{Fact}
+\newtheorem{Claim}[Thm]{Claim}
+\newtheorem*{Pf}{Proof}
+\newtheorem{Prob}[Thm]{Problem}
+
+\DeclareMathOperator{\spn}{span}
+
+\theoremstyle{remark}
+\newtheorem{Rem}[Thm]{Remark}
+
+\newcounter{solution} \setcounter{solution}{1}
+\newenvironment{Solution}[1][]{\noindent {\textbf{Solution
+\arabic{solution}. #1} \stepcounter{solution} \rm}}{ \qed \newline}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\newcommand{\lam}{\lambda}
+
+% End environments 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Now we're ready to start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\noindent {\bf \huge WES Worksheet 2.1} \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad {\large Fall 2018}\\[.2cm]
+{\large MATH 222, Week 2}\newline \newline
+\noindent {\bf Name: \underline{\hspace{7cm}}}
+\newline
+\thispagestyle{empty}  
+\pagestyle{plain}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\section{When IBP goes wrong...}
+\begin{Prob}
+Consider
+\[
+\int \sin(x) \cos(x) \; dx
+\]
+\begin{enumerate}
+\item Choose $u = \sin(x)$ and $dv = \cos(x) \; dx$ and carry out integration by parts.
+\item Try IBP a second time, using $u = \cos(x)$ and $dv = \sin(x) \; dx$
+\item This gives us back the integral we started with. Use a trig identity to get this into the form $\int \text{stuff} = 1 + \int \text{same stuff}$. 
+\item Where did we go wrong here (since we know $0 \not= 1$)?
+\end{enumerate}
+\end{Prob}
+
+\section{Important Trig Integral Trick}
+Use trig identities and what we learned in class to calculate the following integrals.
+\begin{enumerate}
+\item $\int \sin^2(x) \cos^3(x) \; dx$
+\item $\int \sin^3(x) \cos^3(x) \; dx$
+\item $\int \sin^{3}(x) \cos^{2018}(x) \; dx$.
+\end{enumerate}
+
+\section{A very useful aside}
+In these integrals, we usually don't give you high odd powers because you end up having to expand $(1-u^2)^n$ for large $n$, which may look hard. However, we'll consider how to easily expand polynomials of this form. We'll focus on $(1+u)^n$, but this can be used to figure out any expansion by making a substitution for $u$ in our answer. 
+\begin{enumerate}
+\item What is $(1+u)^2$?
+\item What is $(1+u)^3$?
+\item Try to do the previous part by writing out $(1+u)(1+u)(1+u)$ and counting the number of different ways you can get $1, u, u^2$ and $u^3$ by choosing one number from each of the parenthesis. 
+\item This counting you just did is once again related to what are called binomial coefficients (handshake problem), these are defined as follows
+\[
+\binom{n}{k} = \tfrac{n!}{k!(n-k)!}
+\]
+Where $n! = n \cdot (n-1) \cdot \cdots \cdot 1$. We say $n$ choose $k$. This exactly counts the number of ways to choose unique subsets of size $k$ from $n$ elements. You can trust me or try to justify it. Let's think about the previous question again. Try to express the number of ways you could get $u^2$ by choosing one number from each of the parenthesis as a binomial coefficient. Do the same for $u^3$.
+\item Can you generalize this to count the number of ways to get $u^k$ from $(1+u)^n$ by choosing one number from each of the parenthesis?
+\item Use this to justify the following expression
+\[
+(1+u)^n = \sum_{k=0}^n \binom{n}{k} u^k
+\]
+This is part of what is called the binomial theorem.
+\item Using this, calculate $\int \sin^{7}(x) \cos^{4}(x) \; dx$.
+\end{enumerate}
+
+
+\section{There's more to life than sine and cosine!}
+Calculate these integrals using trig identities:
+\begin{enumerate}
+\item $\int \sec(x) \; dx$
+\item $\int \tan(x) \; dx$
+\item $\int \sec(x) \tan^2(x) \; dx$
+\item $\int \sec^3(x) \; dx$
+\item $\int \tfrac{\sec^3(x)}{\tan(x)} \; dx$
+\item $\int \tan^8(x) \sec^4(x) \; dx$.
+\end{enumerate}
+
+\section{Trig Sub for Friday}
+Use a trig sub to solve the following integrals, i.e. let $x =$ trig function.
+\begin{enumerate}
+\item $\int \sqrt{1-4x^2} \; dx$
+\item $\int \tfrac{2}{4x^2-9} \; dx$. What restrictions do we need to place on the domain?
+\item $\int \tfrac{3x}{9 + 4x^2} \; dx$. Do we need domain restrictions? Why or why not?
+\item $\int \tfrac{x^3}{x^2-1} \; dx$. There is another way to do this integral without trig sub.
+\end{enumerate}
+
+\subsection{Challenge Problems}
+These all require a little extra work beyond a trig sub. I give you some hints, but think about why you can't just use a trig sub immediately in each case. The first two illustrate an important trick, when something is not in trig sub form, but you see square roots, you usually want to force it into trig sub form using a well chosen $u$-sub.
+\begin{enumerate}
+\item $\int \sqrt{\tfrac{x}{1-x^3}} \; dx$. Hint: First make a usual kind of substitution.
+\item $\int \sqrt{\tfrac{1-x}{x}} \; dx$. 
+\item $\int \tfrac{x}{\sqrt{2x^2-4x-7}} \; dx$. Hint: Complete the square.
+\item $\int e^{4x} \sqrt{1+e^{2x}} \; dx$.
+\end{enumerate}
+
+\section{Put it all together!} This integral can be calculated at least three different ways. Find three ways and do all of them:
+\[
+\int x^3 \sqrt{1-x^2} \; dx.
+\]
+
+
+
+
+
+
+\end{document}

@@ -1,0 +1,128 @@
+\documentclass[11pt]{article}  % This tells LaTex what sort of document style to use
+
+\usepackage{amssymb}  % These lines tell LaTeX to load additional symbol definitions and style definitions
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{changepage}
+\usepackage{setspace}
+\usepackage{xcolor}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Formatting
+\setlength{\parskip}{0cm}
+\setlength{\parindent}{1cm}
+\singlespacing
+
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{3.25ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
+
+\DeclarePairedDelimiter\abs{\Bigl\bigg|}{\Bigr\bigg|}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  First we set the page layout.
+
+\usepackage[top=1 in, bottom=1in,left=.5in,right=.5in]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Now create some user defined commands.
+
+\newcommand{\map}[1]{\xrightarrow{\#1}}
+\newcommand{\iso}{\cong}
+\newcommand{\define}{\stackrel{\mathrm{def}}{=}}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\e}{\epsilon}
+\newcommand{\A}{\mathbb A}
+\newcommand{\p}{\mathbb P}
+\newcommand{\ds}{\displaystyle}
+
+\let\intt\int
+\renewcommand{\int}{\ds\intt}
+
+\DeclareMathOperator{\lcm}{lcm}
+
+%  End user defined commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% These establish different environments for stating Theorems, Lemmas, Remarks, etc.
+
+\newtheorem{Thm}{Theorem}
+\newtheorem{Prop}[Thm]{Proposition}
+\newtheorem{Lem}[Thm]{Lemma}
+\newtheorem{Cor}[Thm]{Corollary}
+\newtheorem{Axiom}[Thm]{Axiom}
+
+\theoremstyle{definition}
+\newtheorem{Def}[Thm]{Definition}
+\newtheorem{Ex}[Thm]{Example}
+\newtheorem{Exercise}[Thm]{Exercise}
+\newtheorem{Fact}[Thm]{Fact}
+\newtheorem{Claim}[Thm]{Claim}
+\newtheorem*{Pf}{Proof}
+\newtheorem{Prob}[Thm]{Problem}
+
+\DeclareMathOperator{\spn}{span}
+
+\theoremstyle{remark}
+\newtheorem{Rem}[Thm]{Remark}
+
+\newcounter{solution} \setcounter{solution}{1}
+\newenvironment{Solution}[1][]{\noindent {\textbf{Solution
+\arabic{solution}. #1}{\newline\newline} \stepcounter{solution} \rm}}{ \qed \newline}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\newcommand{\lam}{\lambda}
+
+% End environments 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Now we're ready to start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\noindent {\bf \huge Quiz 4} \quad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad {\large Fall 2016}\\[.2cm]
+{\large MATH 221}\newline \newline
+\noindent {\bf Name: \underline{\hspace{7cm}}}
+\newline
+\thispagestyle{empty}  
+\pagestyle{plain}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+\\
+For full credit please explain all of your answers.  {\bf No calculators} are allowed.\\
+
+\begin{Prob}
+Compute the following limit:
+\[
+\lim_{\theta \to 0} \frac{2}{\theta \tan(\theta)} - \frac{2}{\theta \sin(\theta)}
+\]
+\\*[7cm]
+\end{Prob}
+
+\begin{Prob}
+Compute the following limit:
+\[
+\lim_{x \to \infty} \sqrt{x^2+x} - x
+\]
+\end{Prob}
+
+
+\end{document}

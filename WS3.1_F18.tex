@@ -1,0 +1,199 @@
+\documentclass[11pt]{article}  % This tells LaTex what sort of document style to use
+
+\usepackage{amssymb}  % These lines tell LaTeX to load additional symbol definitions and style definitions
+\usepackage{amsthm}
+\usepackage{amsmath}
+\usepackage{enumerate}
+\usepackage{graphicx}
+\usepackage{mathtools}
+\usepackage{multicol}
+\usepackage{parskip}
+\usepackage{changepage}
+\usepackage{setspace}
+\usepackage{xcolor}
+\usepackage{tikz,tikz-cd}	
+\usetikzlibrary{positioning, matrix, shapes}  
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%Formatting
+\setlength{\parskip}{0cm}
+\setlength{\parindent}{1cm}
+\singlespacing
+
+\makeatletter
+\renewcommand{\paragraph}{%
+  \@startsection{paragraph}{4}%
+  {\z@}{3.25ex \@plus 1ex \@minus .2ex}{-1em}%
+  {\normalfont\normalsize\bfseries}%
+}
+\makeatother
+
+\DeclarePairedDelimiter\abs{\Bigl\bigg|}{\Bigr\bigg|}
+\DeclarePairedDelimiter\ceil{\lceil}{\rceil}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  First we set the page layout.
+
+\usepackage[top=1 in, bottom=1in,left=.5in,right=.5in]{geometry}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%  Now create some user defined commands.
+
+\newcommand{\map}[1]{\xrightarrow{\#1}}
+\newcommand{\iso}{\cong}
+\newcommand{\define}{\stackrel{\mathrm{def}}{=}}
+
+\newcommand{\N}{\mathbb N}
+\newcommand{\Z}{\mathbb Z}
+\newcommand{\Q}{\mathbb Q}
+\newcommand{\R}{\mathbb R}
+\newcommand{\C}{\mathbb C}
+\newcommand{\e}{\epsilon}
+\newcommand{\A}{\mathbb A}
+\newcommand{\p}{\mathbb P}
+
+\DeclareMathOperator{\lcm}{lcm}
+
+%  End user defined commands
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% These establish different environments for stating Theorems, Lemmas, Remarks, etc.
+
+\newtheorem{Thm}{Theorem}
+\newtheorem{Prop}[Thm]{Proposition}
+\newtheorem{Lem}[Thm]{Lemma}
+\newtheorem{Cor}[Thm]{Corollary}
+\newtheorem{Axiom}[Thm]{Axiom}
+
+\theoremstyle{definition}
+\newtheorem{Def}[Thm]{Definition}
+\newtheorem{Ex}[Thm]{Example}
+\newtheorem{Exercise}[Thm]{Exercise}
+\newtheorem{Fact}[Thm]{Fact}
+\newtheorem{Claim}[Thm]{Claim}
+\newtheorem*{Pf}{Proof}
+\newtheorem{Prob}[Thm]{Problem}
+
+\DeclareMathOperator{\spn}{span}
+
+\theoremstyle{remark}
+\newtheorem{Rem}[Thm]{Remark}
+
+\newcounter{solution} \setcounter{solution}{1}
+\newenvironment{Solution}[1][]{\noindent {\textbf{Solution
+\arabic{solution}. #1} \stepcounter{solution} \rm}}{ \qed \newline}
+
+\renewcommand{\labelenumi}{(\alph{enumi})}
+\newcommand{\lam}{\lambda}
+
+% End environments 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Now we're ready to start
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{document}
+
+\noindent {\bf \huge WES Worksheet 3.1} \qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad\qquad {\large Fall 2018}\\[.2cm]
+{\large MATH 222, Week 3}\newline \newline
+\noindent {\bf Name: \underline{\hspace{7cm}}}
+\newline
+\thispagestyle{empty}  
+\pagestyle{plain}
+\setcounter{page}{1}
+\pagenumbering{arabic}
+
+\section*{Factoring polynomials}
+This section will focus on factoring polynomials. In general this is an incredibly difficult problem that algebraist's are extremely interested in. We will focus on more doable cases. There is a cool result that characterizes which rational numbers could appear as roots of a polynomial, it's called the rational roots theorem.
+\ \\ \
+\ \\ \
+\noindent The \textbf{rational roots theorem} says that $(x-\frac ab)$, where
+	$\frac ab$ is a fraction in lowest terms, divides a polynomial
+	$a_nx^n+\dots+a_1x+a_0$ of degree $n$ precsiely when $b$ divides $a_n$
+	and $a$ divides $a_0$. Why might this be the case?
+\ \\ \
+\begin{Prob}
+What are the possible rational roots of the polynomial $x^3-6 x^2+11 x-6$?
+\end{Prob}
+\ \\ \
+
+\begin{Prob}
+Factor the polynomial $x^3-8x^2+21x-18$.
+\end{Prob}
+
+\subsection*{The Discriminant}
+The discriminant of a degree two polynomial $f(x) = ax^2+bx+c$ is $\Delta = b^2 - 4ac$. We want to think about what the discriminant tells us about the polynomial $f(x)$.
+\begin{enumerate}
+\item What can we say about $f(x)$ if $\Delta \geq 0$, i.e. how can we write $f(x)$? (Quadratic formula)
+\item What happens if $\Delta < 0$? What does this tell us about $f(x)$? Remember we are always working over the real numbers.
+\item Can we factor $x^2 -2x + 1$ in the real numbers?
+\item How about $x^2 +2x + 7$? Can we factor it in the real numbers? Why or why not?
+\end{enumerate}
+
+\section*{Partial fractions}
+\subsection*{Heaviside cover-up method}
+A rational function $f(x)$ is \textbf{really simple} if it has a proper
+	rational expression $f(x)=\dfrac{p(x)}{q(x)}$ such that every root of $q(x)$ has
+	order $1$ and $q(x)$ has no factors $x^2+bx+c$ with $b^2-4a<0$. Every really simple rational function has a \textbf{partial fraction
+	decomposition}:
+	\[
+		f(x)=\dfrac{p(x)}{q(x)}=\dfrac{a_{n-1}x^{n-1}+\dots+a_1x+a_0}{(x-r_1)(x-r_2)\cdots(x-r_n)}
+		=
+		\dfrac{A_1}{x-r_1}+\dfrac{A_2}{x-r_2}+\dots+\dfrac{A_n}{x-r_n}
+	\]
+Think about why this is the case. This is most easily found using the \textbf{Heaviside cover-up method}:
+{\footnotesize
+\begin{align*}
+	\dfrac{p(x)}{(x-r_1)\cdots(x-r_{k-1})(x-r_k)(x-r_{k+1})\cdots(x-r_n)}
+		&=
+		\dfrac{A_1}{x-r_1}+\cdots+\dfrac{A_{k-1}}{x-r_{k-1}}+\dfrac{A_k}{x-r_k}+\dfrac{A_{k+1}}{x-r_{k+1}}+\cdots+\dfrac{A_n}{x-r_n}\\
+		\dfrac{p(x)}{(x-r_1)\cdots(x-r_{k-1})(x-r_{k+1})\cdots(x-r_n)}
+			&=\dfrac{A_1(x-r_k)}{x-r_1}+\cdots+\dfrac{A_{k-1}(x-r_k)}{x-r_{k-1}}+A_k+\dfrac{A_{k+1}(x-r_k)}{x-r_{k+1}}+\cdots+\dfrac{A_n(x-r_k)}{(x-r_n)}\\
+		\dfrac{p(r_k)}{(r_k-r_1)\cdots(r_k-r_{k-1})(r_k-r_{k+1})\cdots(r_k-r_n)}&=0+\cdots+0+A_k+0+\cdots+0
+\end{align*}}
+
+\noindent So to find the constant above $x-r_k$ in our partial fraction decomposition we just need to plug $r_k$ into the original polynomial and divide by the differences of $r_k$ with all the other roots. Let's see this in practice.
+\ \\ \
+\begin{Prob}
+	Use long division and a partial fraction decomposition to find the
+		anti-derivative 
+		\[
+		\int\dfrac{x^2+x+1}{x^2+2x-3} \; dx.
+		\]
+\end{Prob}
+
+\begin{Prob}
+Find the partial fraction decomposition of each of the following:
+
+(a) $\dfrac1{x^3-x}$
+\quad
+(b) $\dfrac{x+2}{x^3-x}$
+\quad
+(c) $\dfrac{x^2+1}{x^3+4x^2+x-6}$
+\quad
+(d) $\dfrac{2x^2+2x+2}{x^3+4x^2+x-6}$
+\end{Prob}
+\ \\ \
+\begin{Prob}
+Integrate all of the expressions in Problem 4 with respect to $x$ using your partial fraction decomposition.
+\end{Prob}
+
+\section*{More on the Seven Bridges of K\"onigsberg}
+The city of K\"onisberg in Prussia (not Kaliningrad, Russia) was set on both sides of the Pregel River, and included two large islands - Kneiphof and Lomse - which were connected to each other, or to the two mainland portions of the city, by seven bridges. The problem was to devise a walk through the city that would cross each of those bridges once and only once.
+\ \\ \
+\ \\ \
+\noindent Note that one cannot reach an island or mainland via something that is not a bridge or access any bridge without crossing to its other end. In 1736 Euler was able to prove that this problem has no solution. This is harder than finding a solution because you have to show that no possible path will work rather than just giving a path that does. My hint was to consider the picture of the bridges as a {\bf graph}:
+\[
+\begin{tikzcd}
+&\bullet \ar[ld, bend right, dash] \ar[ld, bend left, dash] \ar[rd, dash]&\\
+\bullet \ar[rr, dash] \ar[rd, bend right, dash] \ar[rd, bend left, dash] &&\bullet \ar[ld, dash]\\
+&\bullet&
+\end{tikzcd}
+\]
+Where each dot, called a {\bf vertex}, represents a land mass and each line, called an {\bf edge}, represents a bridge. The goal is to start at some vertex and walk along each edge exactly once. After Euler's solution to this problem, such walks through graphs became known as {\bf Eulerian Trails}. So what Euler proved is that there is no Eulerian Trail in this graph. He actually proved something more general. He proved exactly when an Eulerian Trail could exist in a graph and showed that this graph does not have the necessary and sufficient condition. I challenge you to think about what this necessary and sufficient condition might be.
+
+
+
+\end{document}
